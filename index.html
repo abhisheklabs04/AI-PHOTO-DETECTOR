@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify AI | Authenticity Detector</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Verify AI Logo" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#detect" class="nav-link">Detect</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text animate-fade-in">
+                <span class="badge">AI-Powered Security</span>
+                <h1>Verify AI<br> <span class="gradient-text">Authenticity Detector</span></h1>
+                <p>Advanced AI algorithms to analyze images and videos for manipulation. Protect the truth in the
+                    digital age.</p>
+                <div class="cta-group">
+                    <a href="#detect" class="btn btn-primary">Start Verification</a>
+                </div>
+            </div>
+            <div class="hero-visual animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="scanner-mockup">
+                    <div class="scan-line"></div>
+                    <i class="fa-solid fa-fingerprint icon-bg"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Detection Section (Merged) -->
+    <section class="detect-section" id="detect">
+        <div class="container">
+            <div class="section-header">
+                <h2>AI Detection Tool</h2>
+                <p>Upload media to check for deepfakes and manipulation.</p>
+            </div>
+
+            <!-- Detection Panel -->
+            <div class="detect-panel animate-fade-in">
+                <!-- Upload Area -->
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" hidden accept="image/*,video/*">
+                    <div class="upload-placeholder">
+                        <i class="fa-solid fa-cloud-arrow-up icon-lg"></i>
+                        <h3>Drag & Drop or Click to Upload</h3>
+                        <p>Supports JPG, PNG (Max 50MB)</p>
+                    </div>
+                </div>
+
+                <!-- Preview Area (Hidden initially) -->
+                <div class="preview-area hidden" id="previewArea">
+                    <div class="media-wrapper">
+                        <img id="imagePreview" class="hidden" alt="Preview">
+                        <video id="videoPreview" class="hidden" controls></video>
+
+                        <!-- Scanning Overlay -->
+                        <div class="scan-overlay hidden" id="scanOverlay">
+                            <div class="scanner-bar"></div>
+                            <div class="scan-text">Analyzing Patterns...</div>
+                        </div>
+                    </div>
+
+                    <div class="action-bar">
+                        <button id="analyzeBtn" class="btn btn-primary btn-lg">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Check Authenticity
+                        </button>
+                        <button id="resetBtn" class="btn btn-outline">
+                            <i class="fa-solid fa-trash"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Dashboard (Hidden initially) -->
+            <section class="results-dashboard hidden" id="resultsDashboard">
+                <div class="result-header">
+                    <h3>Analysis Report</h3>
+                    <span class="report-id">ID: #<span id="reportId">83920</span></span>
+                </div>
+
+                <div class="result-grid">
+                    <!-- Main Verdict -->
+                    <div class="result-card verdict-card">
+                        <h4>Detection Result</h4>
+                        <div class="verdict-display" id="verdictDisplay">
+                            <!-- JS will inject: <i class="icon"></i> <span>REAL / FAKE</span> -->
+                        </div>
+                        <div class="confidence-wrapper">
+                            <div class="label-row">
+                                <span>Confidence</span>
+                                <span id="confidenceValue">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="confidenceBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metadata Panel -->
+                    <div class="result-card info-card">
+                        <h4>File Information</h4>
+                        <ul class="info-list">
+                            <li><span>Type:</span> <span id="metaType">-</span></li>
+                            <li><span>Name:</span> <span id="metaName">-</span></li>
+                            <li><span>Size:</span> <span id="metaSize">-</span></li>
+                            <li><span>Resolution:</span> <span id="metaRes">-</span></li>
+                            <li><span>Format:</span> <span id="metaFormat">-</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- AI Description -->
+                    <div class="result-card desc-card">
+                        <h4>Detection Details</h4>
+                        <div class="terminal-view">
+                            <p class="log-entry highlight" id="aiSummary" style="white-space: pre-line;">&gt;
+                                Analyzing...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Learn more about how Verify AI works.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How accurate is the detection?</h3>
+                    <p>Our AI models are trained on small size of real and synthetic images. We typically achieve 90%
+                        accuracy on known deepfake generation methods.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is my data private?</h3>
+                    <p>Yes. All analysis is performed securely. Use the privacy policy for more details. We do not store
+                        your uploaded media without explicit permission.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What formats are supported?</h3>
+                    <p>We currently support JPEG, PNG, and WebP for images up to 50MB.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Verify AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>
